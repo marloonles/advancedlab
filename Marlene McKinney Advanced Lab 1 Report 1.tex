@@ -1,0 +1,63 @@
+\documentclass{article}
+\usepackage{enumitem}
+\usepackage[margin=1in]{geometry}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue
+    filecolor=magenta}
+\graphicspath{ {./downloads/} }
+\title{Lab 1: MysterResistor - The Unknown Resistor}
+\author{Marlene McKinney}
+\date{September 29, 2025}
+\begin{document}
+\maketitle
+\section{Introduction and Methods}
+This lab demonstrates the ability to use voltage as a parameter to find an unknown resistance. Figure 1 shows the circuit diagram that was used to measure the voltage obtained when the resistor of unknown resistance (named unknown resistor X) and one of known resistance are in parallel. Here the known resistor is 1000 ohms. The ratio between this measured voltage and the input voltage from the Arduino of 5 volts was used in the equation to find the value of resistor X.
+\begin{figure}[h!t]
+\includegraphics[width=6cm]{Lab 1 circuit diagram}
+\centering
+\caption{The mystery resistor is connected in parallel to both the known resistor of 1000 ohms and the voltmeter that will calculate the output voltage that results from the resistor connection.}
+\end{figure}\\
+
+Figure 2 shows the actual Arduino device set-up with the breadboard connections. The Arduino was connected to a computer with the IDE 1.8.19 with the given code that would print the resultant voltage in digital values through the serial monitor function in the IDE. In this digital value system, the maximum value of 5 volts was represented as 1023. The output voltage, denoted as $V_{out}$, along with the given values of the input voltage $V_{in}$ and known resistor $R_1$, was used in following equation:
+\[V_{out}= \frac{{R_2}\times{V_{in}}}{R_1 + R_2},\] 
+where $R_2$ is the unknown resistance of resistor X.
+
+\begin{figure}[h!t]
+\includegraphics[width=8cm]{Lab 1 Breadboard}
+\centering
+\caption{The Arduino and breadboard set-up physically show the circuit connections found in Figure 1.}
+\end{figure}
+
+\section{Results}
+
+The equation above was rearranged to find the unknown resistor X:
+\[V_{out}= \frac{{R_2}\times{V_{in}}}{R_1 + R_2}\]
+\[V_{out} \times R_1 + V_{out} \times R_2 = R_2 \times V_{in}\]
+\[V_{out} \times R_1 = R_2 \times (V_{in} - V_{out})\]
+\[\frac{V_{out}\times{R_1}}{(V_{in} - V_{out})} = R_2\]\\
+
+With the measured output voltage of 845.5, which was obtained by taking the average of the lowest and highest measured digital voltage values, the unknown resistance was calculated to be 4763.4 ohms.\\
+
+To confirm the validity of this calculation, the relationship between the unknown resistance and the output voltage was plotted. A list of possible unknown resistance values was generated from 0 to 10,000, serving as the input. The set values of $R_1 = 1000$ and $V_{in} = 5$ were included in the plotted function. Figure 3 shows the graph for the system, with a point where the mystery resistance is approximately at the measured voltage.
+
+\begin{figure}[t]
+\includegraphics[width=9cm]{Mystery Resistance}
+\centering
+\caption{The plotted function shows the validity of the calculated resistance value through the inclusion of the point that shows that the value is on the curve with the corresponding digital voltage measurement.}
+\end{figure}
+
+\section{Error Calculation}
+
+The values of the measured voltage ranges from 842 to 849, with the average value of 845.5 used to calculate the unknown resistance. Using the error equation, ${\frac{uncertainty}{measurement}} \times 100$, the error percentage of the measurement was calculated: 
+\[\frac{3.5}{845.5} = 0.414\%\]\\
+
+This error is most likely due to noise in the measurements and the hardware set-up. Arduinos have a push pin connection to their breadboards, meaning that there could be variable connection through each of the holes, causing variations in measurements as the Arduino is moved around or even exposed to local air flow. However, the calculated error is very low, so the measurement is relatively precise.
+
+\section{Plotting Code}
+The code for the plot in the Results section along with the LaTeX code for this document can be found on \href{https://github.com/marloonles/advancedlab/tree/main}{GitHub}.
+\end{document}
+
+
