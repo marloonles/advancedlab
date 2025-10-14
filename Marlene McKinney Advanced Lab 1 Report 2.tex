@@ -1,0 +1,57 @@
+\documentclass{article}
+\usepackage{mathtools}
+\usepackage{graphicx}
+\usepackage[margin=1in]{geometry}
+\usepackage{tabularx}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue
+    filecolor=magenta}
+\graphicspath{ {./downloads/} }
+\title{Lab 2: Take Your Temperature}
+\author{Marlene McKinney}
+
+\begin{document}
+\maketitle
+\section{Introduction and Methods}
+Agar is a compound derived from agarose from seaweed. It is commonly used as a reagent in a mixture that slowly cools to become a platform for bacteria growth in cells. Agar has a unique property known as thermal hysteresis, in which its melting temperature (approximately 85 - 90 degrees Celcius) is much higher than its solidification temperature (approximately 34 - 38 degrees Celcius). This phenomenon is due to the formation of hydrogen bonds between the agar molecules as it cools and become a gel. This lab aims to demonstrate the cooling of an agar mixture and show a phase change through data collected by an Arduino. The circuit diagram is shown in Figure 1 and the actual Arduino setup is in Figure 2.
+
+\begin{figure}[h!t]
+\includegraphics[width=5cm]{Lab 2 Circuit}
+\centering
+\caption{Circuit diagram of the thermistor arrangement.}
+\end{figure}
+
+\begin{figure}[h!t]
+\includegraphics[width=5cm]{Lab 2 Arduino}
+\centering
+\caption{Arduino and breadboard setup for thermistor measurements.}
+\end{figure}
+
+An mixture of agar, tryptone, yeast extract, and sodium chloride was mixed and heated to 60 degrees Celcius using a hot plate. The thermistor was then added to mixture, which was allowed to cool.
+
+The Steinhart-Hart equation from the thermistor's product data sheet was used to convert the measured resistances into temperature readings in Kelvin:
+\[T = [A + Bln\frac{R}{R_{ref}} + C[ln\frac{R}{R_{ref}}]^2 + D[ln\frac{R}{R_{ref}}]^3]^{-1},\]
+where, for the thermistor material, $A =  3.354016\times10^{-3}$, $B = 2.569850\times10^{-4}$, $C = 2.620131\times10^{-6}$, and $D = 6.383091\times10^{-8}$.
+\section{Results and Discussion}
+
+The resulting curve from the data collection can be found in Figure 3. It unfortunately does not show a standard cooling curve, which is due to a variety of factors.
+
+\begin{figure}[h!t]
+\includegraphics[width=9cm]{Temperature Diagram}
+\centering
+\caption{Graph of temperature calculated from the measured resistance. Several factors led to the strange nature of the curve.}
+\end{figure}
+
+The agar mixture was heated on a hot plate that potentially caused uneven temperatures in the sample, leading to the seeming equilibiration of the temperature in the beginning of the data where the temperature is increasing rather than being stable and slowly decreasing like it does at approximately 2000 s. 
+
+The mixture also did not solidify. There was agar residue at the bottom of the beaker, suggesting that the temperature that it was heated at was not high enough for its solubility. Usually, the mixture is placed into an autoclave for sterilization before adding it to plates for bacterial colonies, allowing it to reach temperatures and pressures required for full solubilization. It is also possible that the addition of other reagents to the agar changed the temperatures involved in the thermal hysteresis, potentially requiring lower temperatures for gel formation.
+
+Additionally, it is possible that the sodium chloride in the mixture started reacting with the thermistor after a period of time, leading to its corrosion and the data that begins to become erratic at 12000 s. 
+
+
+\section{Plotting Code}
+The code for the plot in the Results section along with the LaTeX code for this document can be found on \href{https://github.com/marloonles/advancedlab/tree/main}{GitHub}.
+
+\end{document}
