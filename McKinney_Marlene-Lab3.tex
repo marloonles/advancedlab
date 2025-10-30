@@ -1,0 +1,43 @@
+\documentclass{article}
+\usepackage{mathtools}
+\usepackage{graphicx}
+\usepackage[margin=1in]{geometry}
+\usepackage{tabularx}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue
+    filecolor=magenta}
+\graphicspath{ {./downloads/} }
+\title{Lab 3: Make a Heater and Measure Temperature}
+\author{Marlene McKinney}
+
+\begin{document}
+\maketitle
+\section{Introduction and Methods}
+Current going through a resistor has the ability to generate enough heat to be measured. With a potentiometer, one can adjust the current that goes through the resistor. A thermistor then can be used to record the temperature changes resulting from the current changes. These elements attached to the breadboard are shown in the circuit diagram in Figure 1 and in the Arduino setup in Figure 2.
+
+\begin{figure}[h!t]
+\includegraphics[width=6cm]{Advanced Lab 1 Lab 3 Circuit}
+\centering
+\caption{Circuit diagram of the potentiometer, resistor, and thermistor arrangement.}
+\end{figure}
+
+\begin{figure}[h!t]
+\includegraphics[width=6cm]{Adv Lab 1 Lab 3 Arduino}
+\centering
+\caption{Arduino and breadboard setup for thermistor measurements.}
+\end{figure}
+
+\section{Results and Discussion}
+The resulting curve from the data collection can be found in Figure 3. Since the Arduino code started the collection at 0 for the potentiometer, it's likely that the plots being inverse of one another was because I started turning the potentiometer in the counterclockwise direction rather than clockwise.
+
+\begin{figure}[h!t]
+\includegraphics[width=11cm]{Potentiometer Graph}
+\centering
+\caption{Graph of thermistor and potentiometer value as a value of time.}
+\end{figure}
+
+\section{Plotting Code}
+The data and code for the plot in the Results section along with the LaTeX code for this document can be found on \href{https://github.com/marloonles/advancedlab/tree/main}{GitHub}.
+\end{document}
