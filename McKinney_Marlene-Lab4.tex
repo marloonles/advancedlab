@@ -1,0 +1,45 @@
+\documentclass{article}
+\usepackage{mathtools}
+\usepackage{graphicx}
+\usepackage[margin=1in]{geometry}
+\usepackage{tabularx}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue
+    filecolor=magenta}
+\graphicspath{ {./downloads/} }
+\title{Lab 4: Detect an Unknown Signal}
+\author{Marlene McKinney}
+\date{November 10, 2025}
+
+\begin{document}
+\maketitle
+\section{Introduction and Methods}
+Fast Fourier Transform, or FFT, is a method of using Fourier transforms to condense combined sinusoidal signals into peaks of their constituent frequencies. For example, FFT can be used to distinguish unique whale sounds to help identify each individual porpoise in aquatic studies. Using scipy, one can use this built-in function to find the constituent frequencies of a given signal. In this lab, a photoresistor was used to detect light flashing, turning signals from that into analog data that can be plotted. Signal ID 8 was detected and its four constituent frequencies were able to be identified using FFT. Figure 1 shows the Arduino and breadboard setup with the photoresistor, while Figure 2 shows the circuit representing the setup.
+
+\begin{figure}[h!t]
+\includegraphics[width=6cm]{adv 1 lab 4 arduino setup}
+\centering
+\caption{Arduino and breadboard setup for photoresistor measurements.}
+\end{figure}
+
+\begin{figure}[h!t]
+\includegraphics[width=6cm]{photoresistor circuit}
+\centering
+\caption{Circuit diagram of the parallel analog photoresistor setup with a 1000 ohm resistor.}
+\end{figure}
+
+\section{Results and Discussion}
+Figure 3 shows the data of both the frequency plot and the original oscillating light graph. The frequency peaks appear to be around 1, 2.5, 4.5, and 6 Hertz. The noise in the data is most likely due to the beginning and end where there were measurements outside of the oscillations from signal 8.
+
+\begin{figure}[h!t]
+\includegraphics[width=16.5cm]{FFT Data}
+\centering
+\caption{Data from FFT frequency plotting and the original data from the oscillating light.}
+\end{figure}
+
+
+\section{Code Used Here}
+The data and code for the plots in the Results section, the Arduino code for the photoresistor sensor, and the LaTeX code for this document can be found on \href{https://github.com/marloonles/advancedlab/tree/main}{GitHub}.
+\end{document}
