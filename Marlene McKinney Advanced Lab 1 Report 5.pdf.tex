@@ -1,0 +1,51 @@
+\documentclass{article}
+\usepackage{mathtools}
+\usepackage{graphicx}
+\usepackage[margin=1in]{geometry}
+\usepackage{tabularx}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue
+    filecolor=magenta}
+\graphicspath{ {./downloads/} }
+\title{Lab 5: A Low Pass Filter}
+\author{Marlene McKinney}
+\date{March 31, 2026}
+
+\begin{document}
+\maketitle
+\section{Introduction and Methods}
+An RC low pass filter is a device that has the ability to filter out high-frequency noise when trying to focus on signals below a certain cutoff. As it is an RC filter, this cutoff frequency is based on the resistance and capacitance of the respective circuit elements, allowing us to customize our noise attenuation abilities. As shown by Bode plots, the magnitude of a signal will decrease with increasing frequency, but past the cutoff frequency, this signal decrease becomes larger and decreased in a logarithmic manner. This cutoff frequency is usually where the magnitude of the signal drops by -3 decibels (dB)An effective RC low pass filter will reflect this relationship, which will be shown through this report.
+
+The objective of this experiment was to construct a simplistic RC low pass filter using a 22 $\Omega$ resistor and a 100 $\mu$F capacitor to act as a voltage divider. Unfortunately, the capacitor was misplaced and could not be sourced in a timely manner. A simulation using the Falstad simulator platform was done instead to show how this relationship would work if done using an Arduino and breadboard setup.
+
+As shown by Figure 1, the Falstad simulation was setup with the same parameters that the Arduino and breadboard would have had. We can calculate the expected cutoff frequency using the equation
+
+\[f_c = \frac{1}{2{\pi}RC}.\]
+
+The data from the simulation was measured through the changing of the input's frequency and recording the maximum voltage through the capacitor for that value. This change of the input frequency would be done using the tone() function in the Arduino language to create a square wave on the PWM digital output pin. Since Bode plots use intensity in dB, the voltage values measured were converted into that using the equation
+
+\[mag = 20*log(\frac{V_{out}}{V_{in}}),\]
+
+where $V_{in}$ refers to the input voltage of 5 V, and $V_{out}$ refers to the voltage going through the resistor.
+
+\begin{figure}[h!t]
+\includegraphics[width=6cm]{falstadcircuit}
+\centering
+\caption{Circuit diagram for the Falstad simulation's RC low pass filter.}
+\end{figure}
+
+\section{Results and Discussion}
+Figure 2 shows the data of both the plot of frequency vs. voltage and the Bode plot that identifies where the cutoff frequency is. The cutoff frequency was calculated to be approximately 72.34 Hz. At this value, the measured voltage was 3.536 V, which has an intensity of -3.00915 dB, which is about -3, the expected signal decrease at the cutoff. This shows that the simulation was effective in showing the properties of this kind of filter.
+
+\begin{figure}[h!t]
+\includegraphics[width=16.5cm]{falstadplots}
+\centering
+\caption{Plots from Falstad RC low pass filter simulation.}
+\end{figure}
+
+
+\section{Code Used Here}
+The data and code for the plots in the Results section and the LaTeX code for this document can be found on \href{https://github.com/marloonles/advancedlab/tree/main}{GitHub}.
+\end{document}
