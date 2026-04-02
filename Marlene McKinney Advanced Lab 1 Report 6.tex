@@ -1,0 +1,49 @@
+\documentclass{article}
+\usepackage{mathtools}
+\usepackage{graphicx}
+\usepackage[margin=1in]{geometry}
+\usepackage{tabularx}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue
+    filecolor=magenta}
+\graphicspath{ {./downloads/} }
+\title{Lab 6: Signal and Noise}
+\author{Marlene McKinney}
+\date{March 31, 2026}
+
+\begin{document}
+\maketitle
+\section{Introduction and Methods}
+Using an Arduino and some signal averaging code, we have the ability to properly detect an oscillating signal from a light-emitting diode (LED). The LED's brightness was programmed using a sinusoidal function that we could detect using a photoresistor (something we've already used). In this experiment, the oscillation had a frequency of 1 Hz, and the signal from the photoresistor was very messy, requiring the use of a smoothing function. This code, which was adjusted from \cite{smoothing}, stores a certain number of readings from the photoresistor into arrays, allowing for the averaging of that number of values and the subsequent smoothing of the function if that number of readings is increased. The Arduino and breadboard setup with the functioning LED can be seen in Figure 1, which the closed circuit diagram in Figure 2. 
+
+\begin{figure}[h!t]
+\includegraphics[width=6cm]{lab6arduino}
+\centering
+\caption{Arduino and breadboard setup for brightness detection with the LED and photoresistor.}
+\end{figure}
+
+\begin{figure}[h!t]
+\includegraphics[width=6cm]{lab6circuit}
+\centering
+\caption{Circuit diagram for the experiment.}
+\end{figure}
+
+
+\section{Results and Discussion}
+Figure 3 shows how increasing the number of readings averaged at a time from 1 (effectively the extremely noisy raw data) to 5 (less noisy) to 10 (most smooth) leads to a better evaluation of the actual oscillating signal.
+
+\begin{figure}[h!t]
+\includegraphics[width=16.5cm]{ledsignalnoisegraph}
+\centering
+\caption{Graph showing the impacts of smoothing the brightness signal through increasing the number of readings averaged.}
+\end{figure}
+
+
+\section{Code Used Here}
+The Arduino code for the experiment, the data and code for the plots in the Results section, and the LaTeX code for this document can be found on \href{https://github.com/marloonles/advancedlab/tree/main}{GitHub}.
+
+\bibliographystyle{apalike}
+\bibliography{advlab1lab6}
+\end{document}
