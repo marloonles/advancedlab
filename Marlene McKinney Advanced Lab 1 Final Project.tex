@@ -1,0 +1,66 @@
+\documentclass{article}
+\usepackage{mathtools}
+\usepackage{graphicx}
+\usepackage[margin=1in]{geometry}
+\usepackage{tabularx}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue
+    filecolor=magenta}
+\graphicspath{ {./downloads/} }
+\title{Lab 6: Signal and Noise}
+\author{Marlene McKinney}
+\date{March 31, 2026}
+
+\begin{document}
+\maketitle
+\section{Introduction, Methods, and Theory}
+The heartbeat is the most important vitals taken in a medical setting as it can help narrow down differential diagnoses from a chief complaint based on whether it's fast (tachycardia), slow (bradycardia), or normal. A heartbeat module can be used to rudimentarily measure a person's heartbeat using an Arduino and simple curve smoothing. The module using a combination of an infrared-emitting LED that sits on the top of your finger and a photoresistor that sits at the bottom of said finger to measure the amount of light that goes through due to bloodflow. A number of factors can affect this process' accuracy, which can be checked with a simple 30 second counting of heartbeats using two non-thumb fingers on the radial artery in the wrist. However, using the module to try and calculate heartbeat and attenate noise from the photoresistor signals is a great demonstration of noise filtering and the use of data fitting. Figure 1 shows the connection of the module to the Arduino, and figure 2 shows the circuit setup from \cite{heartbeat}, which of course does not include the LCD display in the actual experiment. 
+
+The code for the Arduino includes a function for exponential weighted moving average (EWMA), which is a form of filtering. A low-pass filter using an RC circuit works the same way in theory by decreasing the weight of the points causing noise in the system so that the signal is smoother. According to \cite{lowpass}, they even have the same mathematical expression: 
+
+\[y_t = \alpha{x_t} + (1 - \alpha)y_{t-1},\]
+
+where $y_t$ is the filtered value at the given time point t, $\alpha$ is the filtering coefficient that decreases the weight of the previous term, $x_t$ is the raw value at t, and $y_{t-1}$ is the filtered value of the previous time point. Instead of using an RC circuit, we can code the EWMA function into the Arduino script directly. This code was adapted from \cite{ewma}.
+
+Heartbeat data was obtained using an index finger. This data was then analyzed using Python to graph the difference between the raw and smoothed data, and a curve was fitted to the smoothed data to look at accuracy.
+
+\begin{figure}[h!t]
+\includegraphics[width=6cm]{heartbeatmodule}
+\centering
+\caption{Arduino and heartbeat module setup.}
+\end{figure}
+
+\begin{figure}[h!t]
+\includegraphics[width=8cm]{heartbeatcircuit}
+\centering
+\caption{Circuit diagram for a heartbeat module. An LCD display was not used in this experiment.}
+\end{figure}
+
+
+\section{Results and Discussion}
+Figure 3 shows the raw and smoothed data from the heartbeat module. The smoothed data looks a lot less noisier even if it doesn't have a neat oscillating pattern since it's not an artificial signal. The beats per minute (bpm) from the index finger was calculated based on the local minima and was found to be 41.7 bpm. The \verb|curve_fit()| SciPy function was used to find a neat oscillating function that would represent the heartbeat data, which is shown in Figure 4. The curve has a bpm value of 40.6. The fitted curve and the data don't look very similar; the decreasing oscillation in the smoothed data is most likely due to moving of the finger while the module was collecting the signal as humans cannot stay completely still. To look at the accuracy of the fit, the standard deviation between the frequencies of the fitted curve and data was found. The frequency was 0.6762 $\pm$ 0.0051 Hz, which has an uncertainty of approximately 0.75$\%$.
+
+\begin{figure}[h!t]
+\includegraphics[width=16.5cm]{advlab1finalprojectgraph1}
+\centering
+\caption{Graphs showing the impacts of smoothing.}
+\end{figure}
+
+\begin{figure}[h!t]
+\includegraphics[width=16.5cm]{advlab1finalprojectgraph2}
+\centering
+\caption{Graph showing the impacts of smoothing the brightness signal through increasing the number of readings averaged.}
+\end{figure}
+
+The data might be further discussed in terms of its viability. Heart rate at a value of 40 bpm is considered low unless one is a seasoned athlete and would be considered bradycardic. This is of course because the heartbeat module is not intended to actually accurately measure heartbeat, but it's a good way of getting to a close value and looking at how noise can be attenuated in signals easily influenced by outside factors. 
+
+
+\section{Code Used Here}
+The Arduino code for the experiment, the data and code for the plots in the Results section, and the LaTeX code for this document can be found on \href{https://github.com/marloonles/advancedlab/tree/main}{GitHub}.
+
+
+\bibliographystyle{alpha}
+\bibliography{advlab1finalproject}
+\end{document}
